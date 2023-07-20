@@ -4,14 +4,12 @@ import { apiSlice } from './apiSlice';
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => ({ url: PRODUCTS_URL }),
-      keepUnusedDataFor: 5,
-    }),
-    getProductDetails: builder.query({
-      query: (productId) => ({
-        url: `${PRODUCTS_URL}/${productId}`,
+      query: ({ keyword, pageNumber }) => ({
+        url: PRODUCTS_URL,
+        params: { keyword, pageNumber },
       }),
       keepUnusedDataFor: 5,
+      providesTags: ['Products'],
     }),
     createProduct: builder.mutation({
       query: () => ({
@@ -19,6 +17,12 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
       invalidatesTags: ['Product'],
+    }),
+    getProductDetails: builder.query({
+      query: (productId) => ({
+        url: `${PRODUCTS_URL}/${productId}`,
+      }),
+      keepUnusedDataFor: 5,
     }),
     updateProduct: builder.mutation({
       query: (data) => ({
@@ -30,7 +34,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
     }),
     uploadProductImage: builder.mutation({
       query: (data) => ({
-        url: `/api/upload`,
+        url: `/api/uploads/`,
         method: 'POST',
         body: data,
       }),
