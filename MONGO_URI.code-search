@@ -5,7 +5,7 @@
 
 .env:
   1  PORT=4000
-  2: MONGO_URI="mongodb+srv://mafusco60:FloridaSun2023@cluster0.bw1vt6w.mongodb.net/proshop?retryWrites=true&w=majority"
+  2: MONGO_URI=
   3  PAYPAL_CLIENT_ID=YOUR_PAYPAL_CLIENT_ID
 
 .env.example:
